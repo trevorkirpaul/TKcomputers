@@ -6,6 +6,7 @@ import ListItems from './ListItems';
 import {startGetCPUs} from '../../actions/partsCPU';
 
 
+
 // styling
 const Wrapper = styled.div`
   margin: 15px;
@@ -29,6 +30,7 @@ export class Admin extends Component {
   render() {
     return (
       <Wrapper>
+        
         <Title>
           Admin
         </Title>
