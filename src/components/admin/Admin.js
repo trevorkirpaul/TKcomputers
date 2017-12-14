@@ -1,53 +1,59 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import AddOS from './AddItem';
-import ListItems from './ListItems';
-import {startGetCPUs} from '../../actions/partsCPU';
-
+import Paper from 'material-ui/Paper';
+import AddItemButtons from './AddItemButtons';
 
 
 // styling
 const Wrapper = styled.div`
   margin: 15px;
 `; 
-
-const Title = styled.h1`
-  font-size: 3em;
-  font-weight: 300;
-  color: #383838;
+const Panel = styled(Paper)`
+  padding: 15px;
+  max-width: 700px;
+  margin: 10px auto;
+  text-align: center;
 `;
+const Title = styled.h1`
+  font-family: 'Roboto', sans-serif;
+  color: #383838;
+  font-weight: 600;
+  font-size: 2em;
+`;
+const SubTitle = styled.h2`
+  font-family: 'Roboto', sans-serif;
+  color: #383838;
+  font-weight: 300;
+  font-size: 1.2em;
+  `;
 
 
 
 export class Admin extends Component {
-  submit = (values) => {
-    console.log(values);
-  }
-  componentDidMount(){
-    this.props.getCPUs();
-  }
+   
   render() {
     return (
       <Wrapper>
+        <Panel zDepth={1}>
+          <Title>Admin Dashboard</Title>
+          <SubTitle>An easy way to manage the database behind TKcomputers</SubTitle>
+        </Panel>
+        <Panel>
+          <SubTitle>Add Item to Database</SubTitle>
+          <AddItemButtons />
+        </Panel>
         
-        <Title>
-          Admin
-        </Title>
-        <AddOS onSubmit={this.submit}/>
-        <ListItems items={this.props.CPUs}/>
       </Wrapper>
     )
   }
 }
 
+
 const mapStateToProps = state => ({
-  CPUs: state.partsCPU
+  menu: state.menu 
 })
 
-const mapDispatchToProps = dispatch => ({
-  getCPUs: () => dispatch(startGetCPUs())
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Admin);
+export default connect(mapStateToProps)(Admin);
 

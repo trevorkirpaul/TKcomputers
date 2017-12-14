@@ -14,4 +14,29 @@ export const startGetCPUs = () => {
   }
 }
 
+export const startAddSSD = (fields) => {
+  const setSSD = axios.post(`http://${API.API_URI}/parts/ssd`, fields);
+  return(dispatch => {
+    setSSD
+      .then(({data}) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  })
+}
 
+
+export const startAddCase = (fields) => {
+  const setCase = axios.post(`http://${API.API_URI}/parts/set/case`, fields);
+  return(dispatch => {
+    setCase
+      .then(({data}) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  })
+}

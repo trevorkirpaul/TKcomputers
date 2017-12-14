@@ -57,7 +57,7 @@ const renderTextField = ({
   />
 )
 
-// redux form validation - CURRENTLY NOT WIRED UP
+// redux form validation 
 const validate = values => {
   const errors = {};
   const requiredFields = [

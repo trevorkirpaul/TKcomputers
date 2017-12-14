@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 export default () => {
   return (
     <div>
-      <Link to="/products/computers">
-        <FlatButton label="Computers" />
+      <Link to="/products">
+        <FlatButton label="Products" />
       </Link>
-      <FlatButton label="Laptops" />
-      <FlatButton label="Software" />
+      <FlatButton label="Support" />
+      <FlatButton label="FAQ" />
     </div>
   )
 }

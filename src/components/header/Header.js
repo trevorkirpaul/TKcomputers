@@ -12,7 +12,7 @@ import MainNav from './MainNav';
 // styling
 
 const Wrapper = styled.div`
-  margin-bottom: 10px;
+  
   background: #383838;
   color: #F7F7F7;
   font-family: 'Roboto', sans-serif;
@@ -25,12 +25,12 @@ const Wrapper = styled.div`
 const Logo = styled(Link)`
   display: inline-block;
   text-decoration: none;
-  color: #383838;
+  color: #D0E87A;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 1.5em;
   padding: 15px 25px;
-  background: #D0E87A;
+  /* background: #D0E87A; */
   
 `;
 
