@@ -10,6 +10,8 @@ import {
   startAddHDD,
   startAddKeyboard,
   startAddMouse,
+  startAddRAM,
+  startAddFan,
 } from '../../actions/parts';
 import AddButton from './AddButton';
 
@@ -104,6 +106,24 @@ export class AddItemButton extends Component {
     } else {
       this.props.addMouse(fields);
       this.setState({ error: '', modal: '' });
+    }
+  };
+  handleSubmitRam = fields => {
+    const check = checkFields(fields);
+    if (check === false) {
+      return this.setState({ error: 'Please complete the form' });
+    } else {
+      this.props.addRam(fields);
+      this.setState({ modal: '', error: '' });
+    }
+  };
+  handleSubmitFan = fields => {
+    const check = checkFields(fields);
+    if (check === false) {
+      return this.setState({ error: 'Please complete the form' });
+    } else {
+      this.props.addFan(fields);
+      this.setState({ modal: '', error: '' });
     }
   };
   handleClose = () => {
@@ -244,6 +264,32 @@ export class AddItemButton extends Component {
           numberFields={['price']}
           errorStatus={this.state.error}
         />
+        <AddButton
+          label="RAM"
+          onClick={this.handleOpen}
+          title="Add RAM"
+          actions={actions}
+          modal={true}
+          open={this.state.modal === 'RAM'}
+          autoScrollBodyContent={true}
+          onSubmit={this.handleSubmitRam}
+          fields={['brand', 'model', 'series', 'type', 'imagePath']}
+          numberFields={['capacity', 'speed', 'price']}
+          errorStatus={this.state.error}
+        />
+        <AddButton
+          label="Fan"
+          onClick={this.handleOpen}
+          title="Add Case/CPU Fan"
+          actions={actions}
+          modal={true}
+          open={this.state.modal === 'Fan'}
+          autoScrollBodyContent={true}
+          onSubmit={this.handleSubmitFan}
+          fields={['brand', 'model', 'type', 'imagePath']}
+          numberFields={['rpm', 'price']}
+          errorStatus={this.state.error}
+        />
       </Wrapper>
     );
   }
@@ -256,6 +302,8 @@ const mapDispatchToProps = dispatch => ({
   addHDD: fields => dispatch(startAddHDD(fields)),
   addKeyboard: fields => dispatch(startAddKeyboard(fields)),
   addMouse: fields => dispatch(startAddMouse(fields)),
+  addRam: fields => dispatch(startAddRAM(fields)),
+  addFan: fields => dispatch(startAddFan(fields)),
 });
 
 export default connect(null, mapDispatchToProps)(AddItemButton);

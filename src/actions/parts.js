@@ -218,3 +218,65 @@ export const startAddMouse = fields => {
       });
   };
 };
+
+//
+// __RAM MEMORY ACTIONS__
+//
+
+export const startAddRAM = fields => {
+  const setRam = axios.post(`http://${API.API_URI}/parts/set/ram`, fields);
+  return dispatch => {
+    setRam
+      .then(({ data }) => {
+        dispatch({
+          type: 'SUCCESSFULLY_ADDED_PART',
+          data: {
+            part: data.ram,
+            message: data.message,
+            error: '',
+          },
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UNSUCCESSFULL_ADDED_PART',
+          data: {
+            error: err,
+            message: 'Failed to add part',
+            part: '',
+          },
+        });
+      });
+  };
+};
+
+//
+// __RAM MEMORY ACTIONS__
+//
+
+export const startAddFan = fields => {
+  const setFan = axios.post(`http://${API.API_URI}/parts/set/fan`, fields);
+  return dispatch => {
+    setFan
+      .then(({ data }) => {
+        dispatch({
+          type: 'SUCCESSFULLY_ADDED_PART',
+          data: {
+            part: data.fan,
+            message: data.message,
+            error: '',
+          },
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UNSUCCESSFULL_ADDED_PART',
+          data: {
+            error: err,
+            message: 'Failed to add part',
+            part: '',
+          },
+        });
+      });
+  };
+};
