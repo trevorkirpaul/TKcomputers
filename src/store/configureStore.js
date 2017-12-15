@@ -1,8 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import {reducer as formReducer} from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 import partsCPUReducer from '../reducers/partsCPU';
 import auth from '../reducers/auth';
-
+import adminServerReducer from '../reducers/adminServerReducer';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -12,8 +12,8 @@ export default () => {
     combineReducers({
       partsCPU: partsCPUReducer,
       form: formReducer,
-      auth
-     
+      auth,
+      adminServer: adminServerReducer,
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

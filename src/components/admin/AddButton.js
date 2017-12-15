@@ -1,10 +1,9 @@
-import React from 'react'
-import AddForm from './addForms/AddForm'
-import RaisedButton from 'material-ui/RaisedButton'
+import React from 'react';
+import AddForm from './addForms/AddForm';
+import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 
-
-export default (props) => {
+export default props => {
   return (
     <div>
       <RaisedButton
@@ -22,8 +21,11 @@ export default (props) => {
         <AddForm
           onSubmit={props.onSubmit}
           fields={props.fields}
+          numberFields={props.numberFields}
+          boolFields={props.boolFields}
+          errorStatus={props.errorStatus}
         />
       </Dialog>
     </div>
-  )
-}
+  );
+};

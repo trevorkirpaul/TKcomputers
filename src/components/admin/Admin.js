@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Paper from 'material-ui/Paper';
 import AddItemButtons from './AddItemButtons';
 
-
 // styling
 const Wrapper = styled.div`
   margin: 15px;
-`; 
+`;
 const Panel = styled(Paper)`
   padding: 15px;
   max-width: 700px;
@@ -26,34 +25,29 @@ const SubTitle = styled.h2`
   color: #383838;
   font-weight: 300;
   font-size: 1.2em;
-  `;
-
-
+`;
 
 export class Admin extends Component {
-   
   render() {
     return (
       <Wrapper>
         <Panel zDepth={1}>
           <Title>Admin Dashboard</Title>
-          <SubTitle>An easy way to manage the database behind TKcomputers</SubTitle>
+          <SubTitle>
+            An easy way to manage the database behind TKcomputers
+          </SubTitle>
         </Panel>
         <Panel>
           <SubTitle>Add Item to Database</SubTitle>
           <AddItemButtons />
         </Panel>
-        
       </Wrapper>
-    )
+    );
   }
 }
 
-
 const mapStateToProps = state => ({
-  menu: state.menu 
-})
-
+  menu: state.menu,
+});
 
 export default connect(mapStateToProps)(Admin);
-
