@@ -2,15 +2,16 @@ import React from 'react';
 import AddForm from './addForms/AddForm';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
+import styled from 'styled-components';
+
+const Button = styled(RaisedButton)`
+  margin-bottom: 15px;
+`;
 
 export default props => {
   return (
     <div>
-      <RaisedButton
-        label={props.label}
-        onClick={props.onClick}
-        secondary={true}
-      />
+      <Button label={props.label} onClick={props.onClick} secondary={true} />
       <Dialog
         title={props.title}
         actions={props.actions}

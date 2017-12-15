@@ -122,3 +122,99 @@ export const startAddGPU = fields => {
       });
   };
 };
+
+//
+// __HDD ACTIONS__
+//
+
+export const startAddHDD = fields => {
+  const setHDD = axios.post(`http://${API.API_URI}/parts/set/hdd`, fields);
+  return dispatch => {
+    setHDD
+      .then(({ data }) => {
+        dispatch({
+          type: 'SUCCESSFULLY_ADDED_PART',
+          data: {
+            part: data.hdd,
+            message: data.message,
+            error: '',
+          },
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UNSUCCESSFULL_ADDED_PART',
+          data: {
+            error: err,
+            message: 'Failed to add part',
+            part: '',
+          },
+        });
+      });
+  };
+};
+
+//
+// __KEYBOARD ACTIONS__
+//
+
+export const startAddKeyboard = fields => {
+  const setKeyboard = axios.post(
+    `http://${API.API_URI}/parts/set/keyboard`,
+    fields
+  );
+  return dispatch => {
+    setKeyboard
+      .then(({ data }) => {
+        dispatch({
+          type: 'SUCCESSFULLY_ADDED_PART',
+          data: {
+            part: data.keyboard,
+            message: data.message,
+            error: '',
+          },
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UNSUCCESSFULL_ADDED_PART',
+          data: {
+            error: err,
+            message: 'Failed to add part',
+            part: '',
+          },
+        });
+      });
+  };
+};
+
+//
+// __MOUSE ACTIONS__
+//
+
+export const startAddMouse = fields => {
+  const setMouse = axios.post(`http://${API.API_URI}/parts/set/mouse`, fields);
+  return dispatch => {
+    setMouse
+      .then(({ data }) => {
+        dispatch({
+          type: 'SUCCESSFULLY_ADDED_PART',
+          data: {
+            part: data.mouse,
+            message: data.message,
+            error: '',
+          },
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'UNSUCCESSFULL_ADDED_PART',
+          data: {
+            error: err,
+            message: 'Failed to add part',
+            part: '',
+          },
+        });
+      });
+  };
+};

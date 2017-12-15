@@ -7,12 +7,17 @@ import {
   startAddCase,
   startAddCPU,
   startAddGPU,
+  startAddHDD,
+  startAddKeyboard,
+  startAddMouse,
 } from '../../actions/parts';
 import AddButton from './AddButton';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  align-content: space-around;
+  flex-wrap: wrap;
 `;
 
 // fxn to verify if all fields in submitted form are not empty
@@ -45,7 +50,7 @@ export class AddItemButton extends Component {
     }
     this.setState({ error: '' });
     this.props.addGPU(fields);
-    this.setState({ modal: '' });
+    this.setState({ modal: '', error: '' });
   };
   handleSubmitCPU = fields => {
     const check = checkFields(fields);
@@ -71,7 +76,34 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addCase(fields);
-      this.setState({ modal: '' });
+      this.setState({ modal: '', error: '' });
+    }
+  };
+  handleSubmitHDD = fields => {
+    const check = checkFields(fields);
+    if (check === false) {
+      return this.setState({ error: 'Please complete the form' });
+    } else {
+      this.props.addHDD(fields);
+      this.setState({ modal: '', error: '' });
+    }
+  };
+  handlSubmitKeyboard = fields => {
+    const check = checkFields(fields);
+    if (check === false) {
+      return this.setState({ error: 'Please complete the form' });
+    } else {
+      this.props.addKeyboard(fields);
+      this.setState({ modal: '', error: '' });
+    }
+  };
+  handleSubmitMouse = fields => {
+    const check = checkFields(fields);
+    if (check === false) {
+      return this.setState({ error: 'Please complete the form' });
+    } else {
+      this.props.addMouse(fields);
+      this.setState({ error: '', modal: '' });
     }
   };
   handleClose = () => {
@@ -172,6 +204,46 @@ export class AddItemButton extends Component {
           ]}
           errorStatus={this.state.error}
         />
+        <AddButton
+          label="HDD"
+          onClick={this.handleOpen}
+          title="Add HDD"
+          actions={actions}
+          modal={true}
+          open={this.state.modal === 'HDD'}
+          autoScrollBodyContent={true}
+          onSubmit={this.handleSubmitHDD}
+          fields={['brand', 'model', 'imagePath']}
+          numberFields={['capacity', 'rpm', 'price']}
+          errorStatus={this.state.error}
+        />
+        <AddButton
+          label="Keyboard"
+          onClick={this.handleOpen}
+          title="Add Keyboard"
+          actions={actions}
+          modal={true}
+          open={this.state.modal === 'Keyboard'}
+          autoScrollBodyContent={true}
+          onSubmit={this.handlSubmitKeyboard}
+          fields={['brand', 'model', 'keySwitch', 'color', 'imagePath']}
+          numberFields={['price']}
+          boolFields={['backlit']}
+          errorStatus={this.state.error}
+        />
+        <AddButton
+          label="Mouse"
+          onClick={this.handleOpen}
+          title="Add Mouse"
+          actions={actions}
+          modal={true}
+          open={this.state.modal === 'Mouse'}
+          autoScrollBodyContent={true}
+          onSubmit={this.handleSubmitMouse}
+          fields={['brand', 'model', 'type', 'gripStyle', 'color', 'imagePath']}
+          numberFields={['price']}
+          errorStatus={this.state.error}
+        />
       </Wrapper>
     );
   }
@@ -181,6 +253,9 @@ const mapDispatchToProps = dispatch => ({
   addCase: fields => dispatch(startAddCase(fields)),
   addCPU: fields => dispatch(startAddCPU(fields)),
   addGPU: fields => dispatch(startAddGPU(fields)),
+  addHDD: fields => dispatch(startAddHDD(fields)),
+  addKeyboard: fields => dispatch(startAddKeyboard(fields)),
+  addMouse: fields => dispatch(startAddMouse(fields)),
 });
 
 export default connect(null, mapDispatchToProps)(AddItemButton);
