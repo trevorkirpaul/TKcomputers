@@ -11,7 +11,14 @@ const Button = styled(RaisedButton)`
 export default props => {
   return (
     <div>
-      <Button label={props.label} onClick={props.onClick} secondary={true} />
+      <Button
+        label={props.label}
+        onClick={props.onClick}
+        secondary={true}
+        labelStyle={{
+          display: 'block',
+        }}
+      />
       <Dialog
         title={props.title}
         actions={props.actions}

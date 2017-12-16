@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Paper from 'material-ui/Paper';
 import AddItemButtons from './AddItemButtons';
+import ViewDBPanel from './viewDB/ViewDBPanel';
 
 // styling
 const Wrapper = styled.div`
@@ -40,6 +41,11 @@ export class Admin extends Component {
         <Panel>
           <SubTitle>Add Item to Database</SubTitle>
           <AddItemButtons />
+        </Panel>
+
+        <Panel>
+          <SubTitle>View Database</SubTitle>
+          <ViewDBPanel />
         </Panel>
       </Wrapper>
     );
