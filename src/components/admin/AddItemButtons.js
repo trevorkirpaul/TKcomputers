@@ -298,7 +298,7 @@ export class AddItemButton extends Component {
 
         <Snackbar
           open={this.state.snackBarOpen}
-          message={this.props.message}
+          message={this.props.message ? this.props.message : 'error'}
           autoHideDuration={4000}
           onRequestClose={this.handleSnackbarClose}
         />

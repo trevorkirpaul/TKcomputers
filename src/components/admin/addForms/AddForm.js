@@ -115,7 +115,7 @@ export class AddForm extends Component {
     );
   };
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, fields, numberFields, boolFields } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <InstructionsPanel zDepth={1}>
@@ -126,7 +126,7 @@ export class AddForm extends Component {
           </Instructions>
         </InstructionsPanel>
 
-        {this.props.fields.map(field => this.formElementCreator(field))}
+        {fields && fields.map(field => this.formElementCreator(field))}
 
         <InstructionsPanel zDepth={1}>
           <Instructions>
@@ -136,13 +136,12 @@ export class AddForm extends Component {
           </Instructions>
         </InstructionsPanel>
 
-        {this.props.numberFields.map(field => this.numElementCreator(field))}
+        {numberFields &&
+          numberFields.map(field => this.numElementCreator(field))}
 
-        {this.props.boolFields && (
+        {boolFields && (
           <InstructionsPanel zDepth={1}>
-            {this.props.boolFields.map(field =>
-              this.checkElementCreator(field)
-            )}
+            {boolFields.map(field => this.checkElementCreator(field))}
           </InstructionsPanel>
         )}
 
