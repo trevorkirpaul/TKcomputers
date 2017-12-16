@@ -54,16 +54,15 @@ export class AddItemButton extends Component {
     }
     this.setState({ error: '' });
     this.props.addGPU(fields);
-    this.setState({ modal: '', error: '' });
+    this.setState({ modal: '', error: '', snackBarOpen: true });
   };
   handleSubmitCPU = fields => {
     const check = checkFields(fields);
     if (check === false) {
       return this.setState({ error: 'Please complete the form' });
     }
-
     this.props.addCPU(fields);
-    this.setState({ modal: '', error: '' });
+    this.setState({ modal: '', error: '', snackBarOpen: true });
   };
   handleSubmitSSD = fields => {
     const check = checkFields(fields);
@@ -71,8 +70,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     }
     this.props.addSSD(fields);
-    this.setState({ modal: '', error: '' });
-    // console.log(fields);
+    this.setState({ modal: '', error: '', snackBarOpen: true });
   };
   handleSubmitCompCase = fields => {
     const check = checkFields(fields);
@@ -80,7 +78,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addCase(fields);
-      this.setState({ modal: '', error: '' });
+      this.setState({ modal: '', error: '', snackBarOpen: true });
     }
   };
   handleSubmitHDD = fields => {
@@ -98,7 +96,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addKeyboard(fields);
-      this.setState({ modal: '', error: '' });
+      this.setState({ modal: '', error: '', snackBarOpen: true });
     }
   };
   handleSubmitMouse = fields => {
@@ -107,7 +105,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addMouse(fields);
-      this.setState({ error: '', modal: '' });
+      this.setState({ modal: '', error: '', snackBarOpen: true });
     }
   };
   handleSubmitRam = fields => {
@@ -116,7 +114,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addRam(fields);
-      this.setState({ modal: '', error: '' });
+      this.setState({ modal: '', error: '', snackBarOpen: true });
     }
   };
   handleSubmitFan = fields => {
@@ -125,7 +123,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addFan(fields);
-      this.setState({ modal: '', error: '' });
+      this.setState({ modal: '', error: '', snackBarOpen: true });
     }
   };
   handleClose = () => {
@@ -226,6 +224,7 @@ export class AddItemButton extends Component {
             'dvi',
             'power',
             'slotWidth',
+            'price',
           ]}
           errorStatus={this.state.error}
         />

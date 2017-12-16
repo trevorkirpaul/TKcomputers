@@ -53,10 +53,24 @@ export const startAddSSD = fields => {
   return dispatch => {
     setSSD
       .then(({ data }) => {
-        console.log(data);
+        dispatch({
+          type: 'SUCCESSFULLY_ADDED_PART',
+          data: {
+            part: data.ssd,
+            message: data.message,
+            error: '',
+          },
+        });
       })
       .catch(err => {
-        console.log(err);
+        dispatch({
+          type: 'UNSUCCESSFULL_ADDED_PART',
+          data: {
+            error: err,
+            message: 'Failed to add part',
+            part: '',
+          },
+        });
       });
   };
 };

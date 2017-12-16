@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { API } from '../config';
 
-export const removePart = (id, category) => {
-  const removeItem = axios.delete(`http://${API.API_URI}`, { id, category });
+export const startRemovePart = (id, category) => {
+  const removeItem = axios.post(`http://${API.API_URI}/parts/remove`, {
+    id,
+    category,
+  });
   return dispatch => {
     removeItem
       .then(({ data }) => {
