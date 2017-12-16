@@ -17,9 +17,7 @@ export const signIn = function({ email, password }) {
         // save web token we get from server response
         localStorage.setItem('token', response.data.token);
       })
-      .catch(error => {
-        console.log('unsuccesful signin', error);
-      });
+      .catch(error => {});
   };
 };
 

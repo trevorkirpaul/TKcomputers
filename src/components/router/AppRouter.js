@@ -8,6 +8,7 @@ import Admin from '../admin/Admin';
 import SignInWrapper from '../accountActions/SigninWrapper';
 import SignUpWrapper from '../accountActions/SignUpWrapper';
 import Computers from '../products/Computers';
+import LoggedOut from '../accountActions/LoggedOut';
 import Components from '../products/Components';
 import ProductsMain from '../products/ProductsMain';
 import NotFound from '../404/NotFound';
@@ -18,6 +19,7 @@ export default () => {
       <div>
         <Header />
         <Switch>
+          <Route path="/useraction/loggedout" component={LoggedOut} />
           <Route path="/products/components" component={Components} />
           <Route path="/products/computers" component={Computers} />
           <Route path="/products" component={ProductsMain} />
