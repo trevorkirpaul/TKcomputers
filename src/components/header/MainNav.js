@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 
@@ -11,5 +11,5 @@ export default () => {
       <FlatButton label="Support" />
       <FlatButton label="FAQ" />
     </div>
-  )
-}
+  );
+};

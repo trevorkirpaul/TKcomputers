@@ -8,6 +8,8 @@ import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import MainNav from './MainNav';
+import LoggedIn from './LoggedIn';
+import NotLoggedIn from './NotLoggedIn';
 
 // styling
 
@@ -113,8 +115,11 @@ export class Header extends Component {
         <Logo to="/">TKcomputers</Logo>
         <MainNav />
         <SignInWrapper>
-          {this.ifNotLogged()}
-          {this.ifLogged()}
+          {this.state.auth ? (
+            <LoggedIn handleModalOpen={this.handleModalOpen} />
+          ) : (
+            <NotLoggedIn />
+          )}
         </SignInWrapper>
         <Dialog
           title="Log Out"
