@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
@@ -39,6 +40,7 @@ export class AddItemButton extends Component {
       CPU: false,
       modal: '',
       error: '',
+      snackBarOpen: false,
     };
   }
 
@@ -87,7 +89,7 @@ export class AddItemButton extends Component {
       return this.setState({ error: 'Please complete the form' });
     } else {
       this.props.addHDD(fields);
-      this.setState({ modal: '', error: '' });
+      this.setState({ modal: '', error: '', snackBarOpen: true });
     }
   };
   handlSubmitKeyboard = fields => {
@@ -134,6 +136,9 @@ export class AddItemButton extends Component {
     this.setState({
       modal: value,
     });
+  };
+  handleSnackbarClose = () => {
+    this.setState({ snackBarOpen: false });
   };
   render() {
     const actions = [
@@ -290,10 +295,22 @@ export class AddItemButton extends Component {
           numberFields={['rpm', 'price']}
           errorStatus={this.state.error}
         />
+
+        <Snackbar
+          open={this.state.snackBarOpen}
+          message={this.props.message}
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackbarClose}
+        />
       </Wrapper>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  message: state.adminServer.message,
+});
+
 const mapDispatchToProps = dispatch => ({
   addSSD: fields => dispatch(startAddSSD(fields)),
   addCase: fields => dispatch(startAddCase(fields)),
@@ -306,4 +323,4 @@ const mapDispatchToProps = dispatch => ({
   addFan: fields => dispatch(startAddFan(fields)),
 });
 
-export default connect(null, mapDispatchToProps)(AddItemButton);
+export default connect(mapStateToProps, mapDispatchToProps)(AddItemButton);

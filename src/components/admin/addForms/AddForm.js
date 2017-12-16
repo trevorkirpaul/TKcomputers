@@ -40,19 +40,6 @@ const WarningIcon = styled(FontIcon)`
   color: #e91e63 !important;
 `;
 
-// REDUX FORM VALIDATE
-const validate = values => {
-  const errors = {};
-  const requiredFields = ['email', 'password'];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required';
-    }
-  });
-
-  return errors;
-};
-
 // create custom function to render mat-ui text field inside redux form
 const renderTextField = ({
   input,
@@ -84,6 +71,10 @@ const renderNumField = ({
     {...custom}
   />
 );
+
+// field level validation functions
+const required = value => (value ? undefined : 'Required');
+
 // fxn to render checkbox field
 const renderCheckBox = ({ input, label }) => (
   <Checkbox label={label} checked={!!input.value} onCheck={input.onChange} />
@@ -95,14 +86,24 @@ export class AddForm extends Component {
   formElementCreator = ele => {
     return (
       <div key={ele}>
-        <Field name={ele} component={renderTextField} label={ele} />
+        <Field
+          name={ele}
+          component={renderTextField}
+          label={ele}
+          validate={[required]}
+        />
       </div>
     );
   };
   numElementCreator = ele => {
     return (
       <div key={ele}>
-        <Field name={ele} component={renderNumField} label={ele} />
+        <Field
+          name={ele}
+          component={renderNumField}
+          label={ele}
+          validate={[required]}
+        />
       </div>
     );
   };
@@ -165,5 +166,4 @@ export class AddForm extends Component {
 
 export default reduxForm({
   form: 'AddPartDB',
-  validate,
 })(AddForm);
