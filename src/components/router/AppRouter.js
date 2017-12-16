@@ -12,6 +12,7 @@ import LoggedOut from '../accountActions/LoggedOut';
 import Components from '../products/Components';
 import ProductsMain from '../products/ProductsMain';
 import NotFound from '../404/NotFound';
+import CheckAuth from '../HoC/CheckAuth';
 
 export default () => {
   return (
@@ -25,7 +26,7 @@ export default () => {
           <Route path="/products" component={ProductsMain} />
           <Route path="/signup" component={SignUpWrapper} exact />
           <Route path="/signin" component={SignInWrapper} exact />
-          <Route path="/admin" component={Admin} exact />
+          <Route path="/admin" component={CheckAuth(Admin)} exact />
           <Route path="/" component={Welcome} exact />
           <Route component={NotFound} />
         </Switch>

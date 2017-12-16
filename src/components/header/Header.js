@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { signOut } from '../../actions/auth';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import MainNav from './MainNav';
@@ -57,39 +55,7 @@ export class Header extends Component {
   handleModalClose = () => {
     this.setState({ logOutModalOpen: false });
   };
-  ifNotLogged = () => {
-    if (this.state.auth === false) {
-      return (
-        <div>
-          <Link to="/signin">
-            <FlatButton label="Sign In" />
-          </Link>
-          <Link to="/signup">
-            <FlatButton label="Sign Up" />
-          </Link>
-        </div>
-      );
-    }
-  };
-  ifLogged = () => {
-    if (this.state.auth === true) {
-      return (
-        <div>
-          <Link to="/admin">
-            <FlatButton
-              label="Admin"
-              icon={<FontIcon className="fa fa-database" />}
-            />
-          </Link>
-          <FlatButton
-            label="Log Out"
-            icon={<FontIcon className="fa fa-sign-out" />}
-            onClick={this.handleModalOpen}
-          />
-        </div>
-      );
-    }
-  };
+
   componentDidMount() {
     this.setState(() => ({
       auth: this.props.auth,
@@ -107,7 +73,7 @@ export class Header extends Component {
     const actions = [
       <RaisedButton label="cancel" onClick={this.handleModalClose} />,
       <Link to="/useraction/loggedout">
-        <RaisedButton label="Log Out" onClick={this.handleLogOut} />,
+        <RaisedButton label="Log Out" onClick={this.handleLogOut} />
       </Link>,
     ];
     return (
