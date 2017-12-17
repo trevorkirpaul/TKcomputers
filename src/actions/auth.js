@@ -58,12 +58,12 @@ export const signUp = ({ email, password, admin }) => {
         // save web token we get from server response
         localStorage.setItem('token', data.token);
       })
-      .catch(({ data }) => {
+      .catch(error => {
         dispatch({
           type: 'AUTH_ERROR',
           auth: {
             auth: false,
-            error: data,
+            error: error.response.data.error,
             loading: false,
           },
         });
