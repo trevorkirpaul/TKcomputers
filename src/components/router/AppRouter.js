@@ -13,6 +13,7 @@ import Components from '../products/Components';
 import ProductsMain from '../products/ProductsMain';
 import NotFound from '../404/NotFound';
 import CheckAuth from '../HoC/CheckAuth';
+import BlockIfAuth from '../HoC/BlockIfAuth';
 
 export default () => {
   return (
@@ -24,8 +25,8 @@ export default () => {
           <Route path="/products/components" component={Components} />
           <Route path="/products/computers" component={Computers} />
           <Route path="/products" component={ProductsMain} />
-          <Route path="/signup" component={SignUpWrapper} exact />
-          <Route path="/signin" component={SignInWrapper} exact />
+          <Route path="/signup" component={BlockIfAuth(SignUpWrapper)} exact />
+          <Route path="/signin" component={BlockIfAuth(SignInWrapper)} exact />
           <Route path="/admin" component={CheckAuth(Admin)} exact />
           <Route path="/" component={Welcome} exact />
           <Route component={NotFound} />

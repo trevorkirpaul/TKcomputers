@@ -36,20 +36,37 @@ export const signIn = function({ email, password }) {
   };
 };
 
-export const signUp = ({ email, password }) => {
+export const signUp = ({ email, password, admin }) => {
   return dispatch => {
+    // first dispatch to signify user attempting to create acct
+    dispatch({
+      type: 'CLICKED_SIGN_UP',
+      auth: { loading: true },
+    });
     axios
-      .post(URL_signup, { email, password })
-      .then(response => {
+      .post(URL_signup, { email, password, admin })
+      .then(({ data }) => {
         dispatch({
           type: 'LOG_IN',
-          auth: true,
+          auth: {
+            auth: true,
+            error: '',
+            token: data,
+            loading: false,
+          },
         });
         // save web token we get from server response
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', data.token);
       })
-      .catch(error => {
-        console.log('unsuccesful sign up', error);
+      .catch(({ data }) => {
+        dispatch({
+          type: 'AUTH_ERROR',
+          auth: {
+            auth: false,
+            error: data,
+            loading: false,
+          },
+        });
       });
   };
 };

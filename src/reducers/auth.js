@@ -8,6 +8,8 @@ export default (state = authReducerDefaultState, action) => {
   switch (action.type) {
     case 'CLICKED_LOG_IN':
       return { ...action.auth };
+    case 'CLICKED_SIGN_UP':
+      return { ...action.auth };
     case 'LOG_IN':
       return { ...action.auth };
     case 'LOG_OUT':

@@ -4,6 +4,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import styled from 'styled-components';
 import SignInButton from './SignInButton';
+import Checkbox from 'material-ui/Checkbox';
 
 const Form = styled.form``;
 const HeroCard = styled(Paper)`
@@ -53,6 +54,11 @@ const renderTextField = ({
   />
 );
 
+// fxn to render checkbox field
+const renderCheckBox = ({ input, label }) => (
+  <Checkbox label={label} checked={!!input.value} onCheck={input.onChange} />
+);
+
 export class SignIn extends Component {
   formElementCreator = ele => {
     return (
@@ -79,8 +85,20 @@ export class SignIn extends Component {
       </FormEle>
     );
   };
+  checkElementCreator = ele => {
+    return (
+      <FormEle key={ele}>
+        <Field name={ele} component={renderCheckBox} label={ele} />
+      </FormEle>
+    );
+  };
   render() {
-    const { handleSubmit, fields, passwordFields } = this.props;
+    const {
+      handleSubmit,
+      fields,
+      passwordFields,
+      boolFields = [],
+    } = this.props;
     return (
       <Form onSubmit={handleSubmit}>
         <HeroCard zDepth={1}>
@@ -92,7 +110,11 @@ export class SignIn extends Component {
           {fields.map(field => this.formElementCreator(field))}
           {passwordFields.map(field => this.passwordElementCreator(field))}
         </HeroCard>
-
+        {boolFields.length > 0 && (
+          <HeroCard>
+            {boolFields.map(field => this.checkElementCreator(field))}
+          </HeroCard>
+        )}
         <HeroCard>
           <SignInButton label={this.props.title} />
         </HeroCard>
