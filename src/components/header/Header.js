@@ -102,7 +102,7 @@ export class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  auth: state.auth.auth,
 });
 
 const mapDispatchToProps = dispatch => ({

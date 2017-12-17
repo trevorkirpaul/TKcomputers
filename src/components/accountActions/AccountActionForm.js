@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'; 
+import { Field, reduxForm } from 'redux-form';
 import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import styled from 'styled-components';
+import SignInButton from './SignInButton';
 
-
-
-const Form = styled.form`
-
-`
+const Form = styled.form``;
 const HeroCard = styled(Paper)`
   max-width: 500px;
   margin: 15px auto;
@@ -38,14 +34,14 @@ const HeroSubTitle = styled.h2`
 
 const FormEle = styled.div``;
 
-
-
+// field level validation function
+const required = value => (value ? undefined : 'Required');
 
 // create custom function to render mat-ui text field inside redux form
 const renderTextField = ({
   input,
   label,
-  meta: {touched, error},
+  meta: { touched, error },
   ...custom
 }) => (
   <TextField
@@ -55,70 +51,56 @@ const renderTextField = ({
     {...input}
     {...custom}
   />
-)
+);
 
-// redux form validation 
-const validate = values => {
-  const errors = {};
-  const requiredFields = [
-    'email',
-    'password'
-  ];
-  requiredFields.forEach(field => {
-    if (!values[field]){
-      errors[field] = 'Required'
-    }
-  })
-
-  return errors
-}
-
-export class SignIn extends Component { 
-  formElementCreator = (ele) => {
+export class SignIn extends Component {
+  formElementCreator = ele => {
     return (
       <FormEle key={ele}>
         <Field
           name={ele}
           component={renderTextField}
           label={ele}
+          validate={required}
         />
       </FormEle>
     );
-  }
+  };
+  passwordElementCreator = ele => {
+    return (
+      <FormEle key={ele}>
+        <Field
+          name={ele}
+          component={renderTextField}
+          label={ele}
+          validate={required}
+          type="password"
+        />
+      </FormEle>
+    );
+  };
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, fields, passwordFields } = this.props;
     return (
       <Form onSubmit={handleSubmit}>
-
         <HeroCard zDepth={1}>
           <HeroTitle>{this.props.title}</HeroTitle>
-          <HeroSubTitle>
-            Please enter your credentials here
-          </HeroSubTitle>
+          <HeroSubTitle>Please enter your credentials here</HeroSubTitle>
         </HeroCard>
 
         <HeroCard zDepth={1}>
-
-          {
-            this.props.fields.map((field) => this.formElementCreator(field))
-          }
-          
+          {fields.map(field => this.formElementCreator(field))}
+          {passwordFields.map(field => this.passwordElementCreator(field))}
         </HeroCard>
 
         <HeroCard>
-          <RaisedButton
-            label={this.props.title}
-            type="submit"
-          />
+          <SignInButton label={this.props.title} />
         </HeroCard>
       </Form>
-    )
+    );
   }
 }
 
-
-
 export default reduxForm({
   form: 'SignIn',
-  validate
 })(SignIn);

@@ -6,18 +6,33 @@ const URL_signup = `http://${API.API_URI}/signup`;
 
 export const signIn = function({ email, password }) {
   return dispatch => {
+    // first dispatch to signify user attempting to log in
+    dispatch({ type: 'CLICKED_LOG_IN', auth: { loading: true } });
     axios
       .post(URL_signin, { email, password })
-      .then(response => {
+      .then(({ data }) => {
         // if valid credentials
         dispatch({
           type: 'LOG_IN',
-          auth: true,
+          auth: {
+            auth: true,
+            token: data,
+            loading: false,
+          },
         });
         // save web token we get from server response
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', data.token);
       })
-      .catch(error => {});
+      .catch(() => {
+        dispatch({
+          type: 'AUTH_ERROR',
+          auth: {
+            auth: false,
+            error: 'Server error! Please try again or contact an admin!',
+            loading: false,
+          },
+        });
+      });
   };
 };
 
@@ -43,7 +58,10 @@ export const signOut = () => {
   return dispatch => {
     dispatch({
       type: 'LOG_OUT',
-      auth: false,
+      auth: {
+        auth: false,
+        token: '',
+      },
     });
     localStorage.removeItem('token');
   };

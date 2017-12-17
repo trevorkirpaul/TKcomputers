@@ -13,7 +13,7 @@ export default ComposedComponent => {
     }
   }
   const mapStateToProps = state => ({
-    auth: state.auth,
+    auth: state.auth.auth,
   });
   return connect(mapStateToProps)(Authentication);
 };
