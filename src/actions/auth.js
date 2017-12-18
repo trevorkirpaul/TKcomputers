@@ -106,7 +106,8 @@ export const initialAuth = () => {
           auth: {
             auth: true,
             loading: false,
-            message: response.data.message,
+            message: 'Successful log in',
+            userID: response.data._id,
           },
         });
       })
@@ -116,6 +117,7 @@ export const initialAuth = () => {
           auth: false,
           loading: false,
           error: 'error',
+          userID: '',
         });
       });
   };
