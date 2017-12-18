@@ -57,9 +57,7 @@ export class Header extends Component {
   };
 
   componentDidMount() {
-    this.setState(() => ({
-      auth: this.props.auth,
-    }));
+    this.setState({ auth: this.props.auth });
   }
   componentWillReceiveProps(nextProps) {
     this.setState(() => ({

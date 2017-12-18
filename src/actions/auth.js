@@ -83,3 +83,40 @@ export const signOut = () => {
     localStorage.removeItem('token');
   };
 };
+
+//
+// JSON Web Token
+// send token for auth
+
+export const initialAuth = () => {
+  return dispatch => {
+    dispatch({
+      type: 'REQUESTING_AUTH',
+      loading: true,
+    });
+    axios
+      .get(`http://${API.API_URI}/`, {
+        headers: {
+          authorization: localStorage.getItem('token'),
+        },
+      })
+      .then(response => {
+        dispatch({
+          type: 'SUCCESSFUL_AUTH_JWT',
+          auth: {
+            auth: true,
+            loading: false,
+            message: response.data.message,
+          },
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'AUTH_ERROR',
+          auth: false,
+          loading: false,
+          error: 'error',
+        });
+      });
+  };
+};

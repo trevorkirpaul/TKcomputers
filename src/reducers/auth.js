@@ -14,6 +14,10 @@ export default (state = authReducerDefaultState, action) => {
       return { ...action.auth };
     case 'LOG_OUT':
       return { ...action.auth };
+    case 'REQUESTING_AUTH':
+      return { ...action.auth };
+    case 'SUCCESSFUL_AUTH_JWT':
+      return { ...action.auth };
     case 'AUTH_ERROR':
       return { ...action.auth };
     default:

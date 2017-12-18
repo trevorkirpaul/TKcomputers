@@ -1,22 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
+import Avatar from 'material-ui/Avatar';
 
-export default props => {
-  return (
-    <div>
-      <Link to="/admin">
+export default class LoggedIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
+  handleClick = e => {
+    e.preventDefault();
+    this.setState({
+      open: true,
+      anchorEl: e.currentTarget,
+    });
+  };
+  handleRequestClose = () => {
+    this.setState({ open: false });
+  };
+  handleSignOut = cb => {
+    this.setState({ open: false });
+    cb();
+  };
+
+  render() {
+    return (
+      <div>
         <FlatButton
-          label="Admin"
-          icon={<FontIcon className="fa fa-database" />}
+          label="Trevor"
+          labelPosition="after"
+          icon={<Avatar size={25}>Tk</Avatar>}
+          onClick={this.handleClick}
         />
-      </Link>
-      <FlatButton
-        label="Log Out"
-        icon={<FontIcon className="fa fa-sign-out" />}
-        onClick={props.handleModalOpen}
-      />
-    </div>
-  );
-};
+        <Popover
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+          onRequestClose={this.handleRequestClose}
+        >
+          <Menu>
+            <Link to="/admin">
+              <MenuItem
+                rightIcon={<FontIcon className="fa fa-database" />}
+                primaryText="Admin"
+                onClick={this.handleRequestClose}
+              />
+            </Link>
+            <MenuItem
+              rightIcon={<FontIcon className="fa fa-sign-out" />}
+              primaryText="Sign Out"
+              onClick={() => this.handleSignOut(this.props.handleModalOpen)}
+            />
+          </Menu>
+        </Popover>
+      </div>
+    );
+  }
+}
