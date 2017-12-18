@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
-  background: #D0E87A;
+  background: #b4d2ba;
   display: flex;
   justify-content: center;
 `;
@@ -22,5 +22,5 @@ export default () => {
         <Button label="Components" />
       </Link>
     </Wrapper>
-  )
-}
+  );
+};

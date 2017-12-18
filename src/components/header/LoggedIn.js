@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import FlatButton from 'material-ui/FlatButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
+
+const Button = styled(FlatButton)`
+  color: #f7f7f7 !important;
+`;
 
 export default class LoggedIn extends React.Component {
   constructor(props) {
@@ -32,7 +37,7 @@ export default class LoggedIn extends React.Component {
   render() {
     return (
       <div>
-        <FlatButton
+        <Button
           label="Trevor"
           labelPosition="after"
           icon={<Avatar size={25}>Tk</Avatar>}
@@ -50,6 +55,13 @@ export default class LoggedIn extends React.Component {
               <MenuItem
                 rightIcon={<FontIcon className="fa fa-database" />}
                 primaryText="Admin"
+                onClick={this.handleRequestClose}
+              />
+            </Link>
+            <Link to="/profile">
+              <MenuItem
+                rightIcon={<FontIcon className="fa fa-user" />}
+                primaryText="Profile"
                 onClick={this.handleRequestClose}
               />
             </Link>

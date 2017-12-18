@@ -36,7 +36,7 @@ export const signIn = function({ email, password }) {
   };
 };
 
-export const signUp = ({ email, password, admin }) => {
+export const signUp = formInfo => {
   return dispatch => {
     // first dispatch to signify user attempting to create acct
     dispatch({
@@ -44,7 +44,7 @@ export const signUp = ({ email, password, admin }) => {
       auth: { loading: true },
     });
     axios
-      .post(URL_signup, { email, password, admin })
+      .post(URL_signup, formInfo)
       .then(({ data }) => {
         dispatch({
           type: 'LOG_IN',

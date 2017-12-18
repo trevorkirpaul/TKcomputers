@@ -14,6 +14,7 @@ import ProductsMain from '../products/ProductsMain';
 import NotFound from '../404/NotFound';
 import CheckAuth from '../HoC/CheckAuth';
 import BlockIfAuth from '../HoC/BlockIfAuth';
+import Profile from '../profile/Profile';
 
 export default () => {
   return (
@@ -21,6 +22,7 @@ export default () => {
       <div>
         <Header />
         <Switch>
+          <Route path="/profile" component={CheckAuth(Profile)} />
           <Route path="/useraction/loggedout" component={LoggedOut} />
           <Route path="/products/components" component={Components} />
           <Route path="/products/computers" component={Computers} />

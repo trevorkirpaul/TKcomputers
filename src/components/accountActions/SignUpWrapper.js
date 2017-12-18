@@ -13,10 +13,29 @@ export class SignUpWrapper extends Component {
       open: false,
     };
   }
-  handleSubmit = ({ email, password, admin = false }) => {
-    // this.props.signUp({ email, password });
-    if (email !== '' || email !== '') {
-      this.props.signUp({ email, password, admin });
+  handleSubmit = ({
+    admin = false,
+    email,
+    firstName,
+    lastName,
+    city,
+    state,
+    street,
+    password,
+  }) => {
+    // pull recieved argu's into a new object
+    const formInfo = {
+      admin,
+      email,
+      firstName,
+      lastName,
+      city,
+      state,
+      street,
+      password,
+    };
+    if (formInfo.email !== '' || formInfo.email !== '') {
+      this.props.signUp(formInfo);
     } else {
       // form is already being verified with redux-form
       // TODO: add mor verification here
@@ -47,7 +66,7 @@ export class SignUpWrapper extends Component {
         <SignUp
           onSubmit={this.handleSubmit}
           title="Sign Up"
-          fields={['email']}
+          fields={['email', 'firstName', 'lastName', 'city', 'state', 'street']}
           passwordFields={['password']}
           boolFields={['admin']}
         />
@@ -70,8 +89,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signUp: ({ email, password, admin }) =>
-    dispatch(signUp({ email, password, admin })),
+  signUp: formInfo => dispatch(signUp(formInfo)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpWrapper);

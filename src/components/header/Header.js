@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MainNav from './MainNav';
 import LoggedIn from './LoggedIn';
 import NotLoggedIn from './NotLoggedIn';
+import FontIcon from 'material-ui/FontIcon';
 
 // styling
 
@@ -19,11 +20,13 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: baseline;
 `;
-
+const LogoWrapper = styled.div`
+  margin-left: 15px;
+`;
 const Logo = styled(Link)`
   display: inline-block;
   text-decoration: none;
-  color: #d0e87a;
+  color: #f7f7f7;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 1.5em;
@@ -76,7 +79,13 @@ export class Header extends Component {
     ];
     return (
       <Wrapper>
-        <Logo to="/">TKcomputers</Logo>
+        <LogoWrapper>
+          <FontIcon
+            className="fa fa-connectdevelop"
+            style={{ color: '#f7f7f7' }}
+          />
+          <Logo to="/">TKCOMPUTERS</Logo>
+        </LogoWrapper>
         <MainNav />
         <SignInWrapper>
           {this.state.auth ? (
