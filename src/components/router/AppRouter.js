@@ -7,7 +7,7 @@ import Welcome from '../welcome/Welcome';
 import Admin from '../admin/Admin';
 import SignInWrapper from '../accountActions/SigninWrapper';
 import SignUpWrapper from '../accountActions/SignUpWrapper';
-import Computers from '../products/Computers';
+import Computers from '../products/computers/Computers';
 import LoggedOut from '../accountActions/LoggedOut';
 import Components from '../products/Components';
 import ProductsMain from '../products/ProductsMain';
@@ -16,6 +16,7 @@ import CheckAuth from '../HoC/CheckAuth';
 import BlockIfAuth from '../HoC/BlockIfAuth';
 import Profile from '../profile/Profile';
 import ShoppingCart from '../shopping-cart/ShoppingCart';
+import PreBuiltCreator from '../admin/preBuiltCreator/PreBuiltCreator';
 
 export default () => {
   return (
@@ -23,6 +24,10 @@ export default () => {
       <div>
         <Header />
         <Switch>
+          <Route
+            path="/create/computer"
+            component={CheckAuth(PreBuiltCreator)}
+          />
           <Route path="/cart" component={CheckAuth(ShoppingCart)} />
           <Route path="/profile" component={CheckAuth(Profile)} />
           <Route path="/useraction/loggedout" component={LoggedOut} />

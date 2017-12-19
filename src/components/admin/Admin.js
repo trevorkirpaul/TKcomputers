@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Paper from 'material-ui/Paper';
 import AddItemButtons from './AddItemButtons';
 import ViewDBPanel from './viewDB/ViewDBPanel';
 
+import RaisedButton from 'material-ui/RaisedButton';
 // styling
 const Wrapper = styled.div`
   margin: 15px;
@@ -46,6 +48,13 @@ export class Admin extends Component {
         <Panel>
           <SubTitle>View Database</SubTitle>
           <ViewDBPanel />
+        </Panel>
+
+        <Panel>
+          <SubTitle>Manage Pre-Built Computers</SubTitle>
+          <Link to="/create/computer">
+            <RaisedButton label="Create" />
+          </Link>
         </Panel>
       </Wrapper>
     );

@@ -1,12 +1,10 @@
-import React from 'react'
-import Paper from 'material-ui/Paper'
+import React from 'react';
+import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
-import FeaturedItems from './FeaturedItems';
-import ProductHeader from './ProductHeader';
+// import FeaturedItems from './FeaturedItems';
+import ProductHeader from '../ProductHeader';
 
-const Wrapper = styled.div`
-
-`;
+const Wrapper = styled.div``;
 
 const Hero = styled(Paper)`
   max-width: 700px;
@@ -23,27 +21,22 @@ const Title = styled.h1`
 `;
 const SubTitle = styled.h2`
   font-family: 'Roboto', sans-serif;
-  color: #5C5C5C;
+  color: #5c5c5c;
   font-weight: 300;
   font-size: 1.5em;
   margin: 10px;
 `;
-
 
 export default () => {
   return (
     <Wrapper>
       <ProductHeader />
       <Hero zDepth={1}>
-        <Title>
-          Computers
-        </Title>
+        <Title>Computers</Title>
         <SubTitle>
           Designed and tested to be the best tool you've ever used
         </SubTitle>
       </Hero>
-
-      <FeaturedItems title="Featured Items" items={['']}/>
     </Wrapper>
-  )
-}
+  );
+};
