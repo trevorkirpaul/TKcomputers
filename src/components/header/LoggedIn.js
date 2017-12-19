@@ -1,22 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getProfile } from '../../actions/profile/profile';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Button = styled(FlatButton)`
   color: #f7f7f7 !important;
 `;
 
-export default class LoggedIn extends React.Component {
+export class LoggedIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      cartOpen: false,
+      firstName: '',
     };
   }
   handleClick = e => {
@@ -29,16 +39,56 @@ export default class LoggedIn extends React.Component {
   handleRequestClose = () => {
     this.setState({ open: false });
   };
+  handleCartOpen = e => {
+    e.preventDefault();
+    this.setState({
+      cartOpen: true,
+      anchorEl: e.currentTarget,
+    });
+  };
+  handleCartClose = () => {
+    this.setState({ cartOpen: false });
+  };
   handleSignOut = cb => {
     this.setState({ open: false });
     cb();
   };
-
+  componentDidMount() {
+    this.props.getProfileDetails(this.props.id);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState(() => ({
+      firstName: nextProps.firstName,
+    }));
+  }
   render() {
     return (
-      <div>
+      <Wrapper>
+        <div>
+          <IconButton
+            iconStyle={{ color: '#f8f8f8' }}
+            onClick={this.handleCartOpen}
+            tooltip="Shopping Cart"
+          >
+            <FontIcon className="fa fa-shopping-cart" />
+          </IconButton>
+        </div>
+        <Popover
+          open={this.state.cartOpen}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+          onRequestClose={this.handleCartClose}
+        >
+          <Menu>
+            <Link to="/cart">
+              <MenuItem onClick={this.handleCartClose} primaryText="Items" />
+            </Link>
+          </Menu>
+        </Popover>
+
         <Button
-          label="Trevor"
+          label={this.props.profile.firstName}
           labelPosition="after"
           icon={<Avatar size={25}>Tk</Avatar>}
           onClick={this.handleClick}
@@ -72,7 +122,17 @@ export default class LoggedIn extends React.Component {
             />
           </Menu>
         </Popover>
-      </div>
+      </Wrapper>
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  getProfileDetails: id => dispatch(getProfile(id)),
+});
+
+const mapStateToProps = state => ({
+  id: state.auth.userID,
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoggedIn);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProfile } from '../../actions/profile/profile';
 import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
 import ProfileInfo from './ProfileInfo';
@@ -19,29 +18,20 @@ const Title = styled.h1`
 `;
 
 export class Profile extends Component {
-  componentDidMount() {
-    this.props.userID && this.props.getProfile(this.props.userID);
-  }
-
   render() {
     return (
       <Wrapper>
         <TitleWrapper>
           <Title>User Profile</Title>
         </TitleWrapper>
-        <ProfileInfo {...this.props.profile} />
+        <ProfileInfo profile={this.props.profile} />
       </Wrapper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile.profile,
-  userID: state.auth.userID,
+  profile: state.profile,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getProfile: id => dispatch(getProfile(id)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps)(Profile);

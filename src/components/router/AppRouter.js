@@ -15,6 +15,7 @@ import NotFound from '../404/NotFound';
 import CheckAuth from '../HoC/CheckAuth';
 import BlockIfAuth from '../HoC/BlockIfAuth';
 import Profile from '../profile/Profile';
+import ShoppingCart from '../shopping-cart/ShoppingCart';
 
 export default () => {
   return (
@@ -22,6 +23,7 @@ export default () => {
       <div>
         <Header />
         <Switch>
+          <Route path="/cart" component={CheckAuth(ShoppingCart)} />
           <Route path="/profile" component={CheckAuth(Profile)} />
           <Route path="/useraction/loggedout" component={LoggedOut} />
           <Route path="/products/components" component={Components} />

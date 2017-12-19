@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { initialAuth } from './actions/auth';
+// import { initialAuth } from './actions/auth';
 import configureStore from './store/configureStore';
 import AppRouter from './components/router/AppRouter';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -22,17 +22,20 @@ if (token) {
   // DEV ONLY
   // in production, will check local storage in a component
   // if token exist, render loading view whiles making http req
-
   // Use this to simulate http request
-  store.dispatch(initialAuth());
-
+  // store.dispatch(initialAuth());
   // use this for instant update
-  // if (token) {
-  //   store.dispatch({
-  //     type: 'LOG_IN',
-  //     auth: { auth: true, token, loading: false },
-  //   });
-  // }
+  if (token) {
+    store.dispatch({
+      type: 'LOG_IN',
+      auth: {
+        auth: true,
+        token,
+        loading: false,
+        userID: '5a39491c9dec4171f72dc457',
+      },
+    });
+  }
 }
 
 class App extends Component {

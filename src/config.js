@@ -1,5 +1,5 @@
 // const localhost = 'localhost';
-const localhost = '192.168.1.134';
+const localhost = '192.168.1.132';
 
 export const API = {
   API_URI: `${localhost}:3090`,
