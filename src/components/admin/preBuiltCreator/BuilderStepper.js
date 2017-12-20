@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { startCreatePreBuiltComputer } from '../../../actions/PreBuiltCreator_SUBMIT';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 // import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -7,21 +9,27 @@ import styled from 'styled-components';
 import Welcome from './steps/Welcome';
 import SelectParts from './steps/SelectParts';
 import AdditionalOptions from './steps/AdditionalOptions';
+import Review from './steps/Review';
+import FinalStep from './steps/FinalStep';
+
 const Wrapper = styled(Paper)`
   padding: 15px;
   max-width: 700px;
   margin: 10px auto;
 `;
 
-export default class BuilderStepper extends Component {
+export class BuilderStepper extends Component {
   constructor(props) {
     super(props);
     this.state = {
       finished: false,
       stepIndex: 0,
-      computer: {},
     };
   }
+  // method for redux-form final submit, passed to FinalStep
+  handleSubmit = formInfo => {
+    this.props.createComputer(formInfo);
+  };
 
   // methods for form on step 2, select parts
 
@@ -59,7 +67,7 @@ export default class BuilderStepper extends Component {
       case 2:
         return <AdditionalOptions />;
       case 3:
-        return 'Finally, we will review all the ooptions and if correct submit to the database';
+        return <Review />;
       default:
         return 'this isnt a  page';
     }
@@ -87,10 +95,7 @@ export default class BuilderStepper extends Component {
 
         <div>
           {this.state.finished ? (
-            <div>
-              <p>complete form</p>
-              <FlatButton label="Reset" onClick={this.handleReset} />
-            </div>
+            <FinalStep goBack={this.handleReset} onSubmit={this.handleSubmit} />
           ) : (
             <div>
               {this.getStepContent(stepIndex)}
@@ -109,3 +114,9 @@ export default class BuilderStepper extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  createComputer: form => dispatch(startCreatePreBuiltComputer(form)),
+});
+
+export default connect(null, mapDispatchToProps)(BuilderStepper);

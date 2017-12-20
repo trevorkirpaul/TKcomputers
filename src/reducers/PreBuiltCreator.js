@@ -2,6 +2,7 @@ const defaultPrebuiltCreatorState = {
   loading: false,
   cpus: [],
   gpus: [],
+  error: false,
 };
 
 export default (state = defaultPrebuiltCreatorState, action) => {
@@ -64,6 +65,19 @@ export default (state = defaultPrebuiltCreatorState, action) => {
         ...state,
         fans: action.data,
         loading: false,
+      };
+    case 'COMPLETE:PREBUILT_CREATOR':
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        computer: action.data,
+      };
+    case 'ERROR:PREBUILT_CREATOR_CREATING':
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     default:
       return state;

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+// import SelectField from 'material-ui/SelectField';
 import Divider from 'material-ui/Divider';
 
 // field level validation functions
@@ -25,24 +24,24 @@ const renderTextField = ({
   />
 );
 
-// render select field using mat-ui for redux form
-const renderSelectField = ({
-  input,
-  label,
-  meta: { touched, error },
-  children,
-  onChange,
-  ...custom
-}) => (
-  <SelectField
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(value)}
-    children={children}
-    {...custom}
-  />
-);
+// // render select field using mat-ui for redux form
+// const renderSelectField = ({
+//   input,
+//   label,
+//   meta: { touched, error },
+//   children,
+//   onChange,
+//   ...custom
+// }) => (
+//   <SelectField
+//     floatingLabelText={label}
+//     errorText={touched && error}
+//     {...input}
+//     onChange={(event, index, value) => input.onChange(value)}
+//     children={children}
+//     {...custom}
+//   />
+// );
 
 export class AdditionalOptions extends Component {
   render() {
@@ -53,18 +52,26 @@ export class AdditionalOptions extends Component {
           name="price"
           type="number"
           component={renderTextField}
-          label="price(overwite)"
+          label="price(suggested: <price>)"
           validate={required}
         />
         <Divider />
         <Field
-          name="special"
-          component={renderSelectField}
-          label="special option test"
-        >
-          <MenuItem value={0} primaryText="option 1" />
-          <MenuItem value={1} primaryText="option 2" />
-        </Field>
+          name="imagePath"
+          component={renderTextField}
+          label="image path/filename"
+          validate={required}
+        />
+        <Divider />
+
+        <Field
+          name="description"
+          multiLine={true}
+          rows={4}
+          component={renderTextField}
+          label="enter description"
+          validate={required}
+        />
       </form>
     );
   }
