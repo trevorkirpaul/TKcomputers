@@ -6,6 +6,7 @@ import adminServerReducer from '../reducers/adminServerReducer';
 import loadViewReducer from '../reducers/viewDB/loadViewReducer';
 import viewMoreItemReducer from '../reducers/viewDB/viewMoreItem';
 import profile from '../reducers/profile/profile';
+import PreBuiltCreator from '../reducers/PreBuiltCreator';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -20,6 +21,7 @@ export default () => {
       adminViewItems: loadViewReducer,
       viewMoreItem: viewMoreItemReducer,
       profile,
+      PreBuiltCreator,
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

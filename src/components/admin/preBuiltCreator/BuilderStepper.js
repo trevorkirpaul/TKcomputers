@@ -4,6 +4,8 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
+import Welcome from './steps/Welcome';
+import SelectParts from './steps/SelectParts';
 
 const Wrapper = styled(Paper)`
   padding: 15px;
@@ -19,12 +21,15 @@ export default class BuilderStepper extends Component {
       stepIndex: 0,
     };
   }
+
+  // methods for form on step 2, select parts
+
   // methods to handle step navigation
   handleNext = () => {
     const { stepIndex } = this.state;
     this.setState({
       stepIndex: stepIndex + 1,
-      finished: stepIndex >= 4,
+      finished: stepIndex >= 3,
     });
   };
   handlePrev = () => {
@@ -40,23 +45,24 @@ export default class BuilderStepper extends Component {
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return 'Welcome to the PreBuilt creator!';
+        return <Welcome />;
       case 1:
-        return 'Select parts for the final build';
+        return <SelectParts />;
       case 2:
         return 'Here we will set the overall package details and values';
       case 3:
-        return 'Finally, we will review all the ooptions and if correct submit to teh database';
+        return 'Finally, we will review all the ooptions and if correct submit to the database';
       default:
         return 'this isnt a  page';
     }
   }
   render() {
+    const { stepIndex } = this.state;
     return (
       <Wrapper>
         <h3>from builder</h3>
 
-        <Stepper activeStep={this.state.stepIndex}>
+        <Stepper activeStep={stepIndex}>
           <Step>
             <StepLabel>Welcome</StepLabel>
           </Step>
@@ -67,7 +73,7 @@ export default class BuilderStepper extends Component {
             <StepLabel>Package Options</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Review and submit</StepLabel>
+            <StepLabel>Review</StepLabel>
           </Step>
         </Stepper>
 
@@ -78,12 +84,12 @@ export default class BuilderStepper extends Component {
               <FlatButton label="Reset" onClick={this.handleReset} />
             </div>
           ) : (
-            <div className="messages">
-              <p>{this.getStepContent(this.state.stepIndex)}</p>
+            <div>
+              {this.getStepContent(stepIndex)}
               <div className="actions">
                 <FlatButton
                   label="Back"
-                  disabled={this.state.stepIndex === 0}
+                  disabled={stepIndex === 0}
                   onClick={this.handlePrev}
                 />
                 <FlatButton label="Next" onClick={this.handleNext} />

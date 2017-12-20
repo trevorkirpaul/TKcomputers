@@ -190,6 +190,7 @@ export class AddItemButton extends Component {
           onSubmit={this.handleSubmitCPU}
           fields={[
             'brand',
+            'model',
             'chipset',
             'cpuSeries',
             'memory',
