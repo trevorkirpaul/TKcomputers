@@ -3,7 +3,17 @@ import { connect } from 'react-redux';
 import BuilderStepper from './BuilderStepper';
 import styled from 'styled-components';
 import Paper from 'material-ui/Paper';
-import { startGetCpus } from '../../../actions/PreBuiltCreator';
+import {
+  startGetCpus,
+  startGetGpus,
+  startGetSSDs,
+  startGetHDDs,
+  startGetRams,
+  startGetKeyboards,
+  startGetMouses,
+  startGetCases,
+  startGetFans,
+} from '../../../actions/PreBuiltCreator';
 
 const TitleWrapper = styled(Paper)`
   padding: 15px;
@@ -19,6 +29,14 @@ const Title = styled.h1`
 export class PreBuiltCreator extends Component {
   componentDidMount() {
     this.props.getCpus();
+    this.props.getGpus();
+    this.props.getSSDS();
+    this.props.getHDDs();
+    this.props.getRams();
+    this.props.getKeyboards();
+    this.props.getMouses();
+    this.props.getCases();
+    this.props.getFans();
   }
   render() {
     return (
@@ -34,6 +52,14 @@ export class PreBuiltCreator extends Component {
 
 const mapDispatchToProps = dispatch => ({
   getCpus: () => dispatch(startGetCpus()),
+  getGpus: () => dispatch(startGetGpus()),
+  getSSDS: () => dispatch(startGetSSDs()),
+  getHDDs: () => dispatch(startGetHDDs()),
+  getRams: () => dispatch(startGetRams()),
+  getKeyboards: () => dispatch(startGetKeyboards()),
+  getMouses: () => dispatch(startGetMouses()),
+  getCases: () => dispatch(startGetCases()),
+  getFans: () => dispatch(startGetFans()),
 });
 
 export default connect(null, mapDispatchToProps)(PreBuiltCreator);

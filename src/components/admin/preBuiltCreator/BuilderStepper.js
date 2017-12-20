@@ -6,7 +6,7 @@ import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
 import Welcome from './steps/Welcome';
 import SelectParts from './steps/SelectParts';
-
+import AdditionalOptions from './steps/AdditionalOptions';
 const Wrapper = styled(Paper)`
   padding: 15px;
   max-width: 700px;
@@ -19,6 +19,7 @@ export default class BuilderStepper extends Component {
     this.state = {
       finished: false,
       stepIndex: 0,
+      computer: {},
     };
   }
 
@@ -32,6 +33,9 @@ export default class BuilderStepper extends Component {
       finished: stepIndex >= 3,
     });
   };
+  // form methods
+
+  // stepper methods
   handlePrev = () => {
     const { stepIndex } = this.state;
     if (stepIndex > 0) {
@@ -41,6 +45,10 @@ export default class BuilderStepper extends Component {
   handleReset = () => {
     this.setState({ stepIndex: 0, finished: false });
   };
+  handleSetComputer = e => {
+    e.preventDefault();
+    this.setState({});
+  };
   // method to generate content based on step level
   getStepContent(stepIndex) {
     switch (stepIndex) {
@@ -49,7 +57,7 @@ export default class BuilderStepper extends Component {
       case 1:
         return <SelectParts />;
       case 2:
-        return 'Here we will set the overall package details and values';
+        return <AdditionalOptions />;
       case 3:
         return 'Finally, we will review all the ooptions and if correct submit to the database';
       default:
@@ -70,7 +78,7 @@ export default class BuilderStepper extends Component {
             <StepLabel>Select Parts</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Package Options</StepLabel>
+            <StepLabel>Additional Options</StepLabel>
           </Step>
           <Step>
             <StepLabel>Review</StepLabel>

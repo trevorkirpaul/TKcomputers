@@ -13,6 +13,7 @@ const renderTextField = ({
   input,
   label,
   meta: { touched, error },
+  onChange,
   ...custom
 }) => (
   <TextField
@@ -23,12 +24,14 @@ const renderTextField = ({
     {...custom}
   />
 );
+
 // render select field using mat-ui for redux form
 const renderSelectField = ({
   input,
   label,
   meta: { touched, error },
   children,
+  onChange,
   ...custom
 }) => (
   <SelectField
@@ -41,39 +44,27 @@ const renderSelectField = ({
   />
 );
 
-export class MultiForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cpus: [],
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const cpus = nextProps.cpus;
-    this.setState(() => ({
-      cpus,
-    }));
-  }
-
+export class AdditionalOptions extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <Field
-          name="name"
+          name="price"
+          type="number"
           component={renderTextField}
-          label="Pre-Built Name"
+          label="price(overwite)"
           validate={required}
         />
         <Divider />
-        <Field name="cpu" component={renderSelectField} label="select a cpu">
-          {this.state.cpus.map(cpu => (
-            <MenuItem key={cpu._id} value={cpu._id} primaryText={cpu.model} />
-          ))}
+        <Field
+          name="special"
+          component={renderSelectField}
+          label="special option test"
+        >
+          <MenuItem value={0} primaryText="option 1" />
+          <MenuItem value={1} primaryText="option 2" />
         </Field>
-        <Divider />
-        <Field name="gpu" component={renderSelectField} label="select a gpu" />
       </form>
     );
   }
@@ -81,4 +72,5 @@ export class MultiForm extends Component {
 
 export default reduxForm({
   form: 'AddPreBuilt',
-})(MultiForm);
+  destroyOnUnmount: false,
+})(AdditionalOptions);

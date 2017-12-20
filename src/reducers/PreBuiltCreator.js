@@ -1,6 +1,7 @@
 const defaultPrebuiltCreatorState = {
   loading: false,
   cpus: [],
+  gpus: [],
 };
 
 export default (state = defaultPrebuiltCreatorState, action) => {
@@ -13,7 +14,55 @@ export default (state = defaultPrebuiltCreatorState, action) => {
     case 'PREBUILT_CREATOR:FETCHING_PARTS':
       return {
         ...state,
-        cpus: action.data,
+        cpus: action.cpus,
+        loading: false,
+      };
+    case 'GPU:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        gpus: action.data,
+        loading: false,
+      };
+    case 'SSD:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        ssds: action.data,
+        loading: false,
+      };
+    case 'HDD:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        hdds: action.data,
+        loading: false,
+      };
+    case 'RAM:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        rams: action.data,
+        loading: false,
+      };
+    case 'KEYBOARD:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        keyboards: action.data,
+        loading: false,
+      };
+    case 'MOUSE:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        mouses: action.data,
+        loading: false,
+      };
+    case 'CASE:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        cases: action.data,
+        loading: false,
+      };
+    case 'FANS:PREBUILT_CREATOR:FETCHING_PARTS':
+      return {
+        ...state,
+        fans: action.data,
         loading: false,
       };
     default:
