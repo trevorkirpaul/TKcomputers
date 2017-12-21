@@ -10,7 +10,7 @@ export default (state = defaultPrebuiltCreatorState, action) => {
     case 'PREBUILT_CREATOR:LOADING':
       return {
         ...state,
-        loading: true,
+        loading: action.loading,
       };
     case 'PREBUILT_CREATOR:FETCHING_PARTS':
       return {
@@ -69,15 +69,20 @@ export default (state = defaultPrebuiltCreatorState, action) => {
     case 'COMPLETE:PREBUILT_CREATOR':
       return {
         ...state,
-        loading: false,
-        error: false,
+        loading: action.loading,
+        error: action.error,
         computer: action.data,
+        complete: action.complete,
       };
     case 'ERROR:PREBUILT_CREATOR_CREATING':
       return {
         ...state,
-        loading: false,
-        error: true,
+        loading: action.loading,
+        error: action.eror,
+      };
+    case 'CLEANUP:PREBUILT_CREATOR':
+      return {
+        complete: action.complete,
       };
     default:
       return state;

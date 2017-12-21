@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import styled from 'styled-components';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 
 const Wrapper = styled(Paper)`
   padding: 15px;
@@ -13,9 +13,12 @@ const Title = styled.h2`
   color: #383838;
   font-weight: 300;
 `;
+//resets form in redux after succesful submit
+const afterSubmit = (result, dispatch) => dispatch(reset('AddPreBuilt'));
 
 export const FinalStep = props => {
   const { handleSubmit, goBack } = props;
+
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
@@ -31,4 +34,5 @@ export const FinalStep = props => {
 export default reduxForm({
   form: 'AddPreBuilt',
   destroyOnUnmount: false,
+  onSubmitSuccess: afterSubmit,
 })(FinalStep);

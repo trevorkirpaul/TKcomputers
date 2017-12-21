@@ -49,3 +49,15 @@ This is a much more complex project than Bartr and I've been realizing I need to
 So far I've been implementing 'admin' features to handle adding parts to the database. I have also been trying to make it a legit process, so I'm including light verification on forms and tracking state with redux. Redux form makes forms easier in general, although I need to work with it more. I'm dynamically generating form fields and it's making validation tricky. It also took some work to get it working with Material-UI correctly.
 
 A big concern right now is making sure the app is organized correctly so I can make the dev process as simple as possible. I don't mean file structure but how the app logic flows. I'll have 'secure' pages for admins but I need to focus on how I'll implenent the customer facing side. I still have a lot of work to do!
+
+### Dec 20th, 2017
+
+Redux-form has helped out tremendously not only with making form creation and management easier but helping me move more towards thinking 'declaratively'. I'm becoming more comfortable with trying to create components that take use props to render content. Creating dyanmic forms in this project was the main inspiring point.
+
+I also focused on running multiple dispatches in action creators so I could render loading states.
+
+One feature that I've enjoyed creating (so far) is the multi-component/page form wizard for creating computers/packages to sell to the customer. It's basically just creating an object with the object IDs of the components going in and it wasn't too challenging to get working. Again, using material-ui and redux-form help a lot but that fact that I got the logic set up quickly made me feel great about my progress so far.
+
+The admin features needed for handeling db actions are now set up and I can start building the customer facing portion of the site. My goal was to at least re-use some of the code from the admin side, like the pre-built form. I can definitely use that for a customer feature of 'create your own pc' to buy.
+
+I'm painting in broad strokes from now on and I'll reafactor once a mvp is achieved.
