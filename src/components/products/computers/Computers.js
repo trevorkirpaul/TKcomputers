@@ -38,7 +38,11 @@ export default () => {
           Designed and tested to be the best tool you've ever used
         </SubTitle>
       </Hero>
-      <FeaturedItem />
+      <FeaturedItem
+        title="Andromeda"
+        subTitle="Great value for this galaxy"
+        computerID="5a3c4af314ae643a2da59758"
+      />
     </Wrapper>
   );
 };

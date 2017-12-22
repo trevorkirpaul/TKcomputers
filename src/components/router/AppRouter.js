@@ -17,7 +17,7 @@ import BlockIfAuth from '../HoC/BlockIfAuth';
 import Profile from '../profile/Profile';
 import ShoppingCart from '../shopping-cart/ShoppingCart';
 import PreBuiltCreator from '../admin/preBuiltCreator/PreBuiltCreator';
-
+import FeaturedComputer from '../products/featured/FeaturedComputer';
 export default () => {
   return (
     <BrowserRouter>
@@ -27,6 +27,11 @@ export default () => {
           <Route
             path="/create/computer"
             component={CheckAuth(PreBuiltCreator)}
+          />
+          <Route
+            exact
+            path="/featured/:computerID"
+            component={FeaturedComputer}
           />
           <Route path="/cart" component={CheckAuth(ShoppingCart)} />
           <Route path="/profile" component={CheckAuth(Profile)} />

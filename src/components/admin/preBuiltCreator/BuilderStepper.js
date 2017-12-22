@@ -34,6 +34,7 @@ export class BuilderStepper extends Component {
   }
   // method for redux-form final submit, passed to FinalStep
   handleSubmit = formInfo => {
+    // console.log(formInfo);
     this.props.createComputer(formInfo);
     this.setState({ open: true });
   };

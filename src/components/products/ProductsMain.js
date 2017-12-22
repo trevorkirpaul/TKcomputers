@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import ProductHeader from './ProductHeader';
 
@@ -9,5 +9,5 @@ export default () => {
     <Wrapper>
       <ProductHeader />
     </Wrapper>
-  )
-}
+  );
+};

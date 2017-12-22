@@ -24,7 +24,7 @@ export class Review extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formInfo: {},
+      formData: {},
     };
   }
 
@@ -32,13 +32,17 @@ export class Review extends React.Component {
     // check if passed value (object state containing form info) exists
     // then render li for each object entry
     if (info) {
-      return Object.entries(info).map(item => (
-        <li key={item[0]}>
-          <span>
-            {item[0]}: {item[1]}
-          </span>
-        </li>
-      ));
+      return info.map(part => {
+        if (part.length > 1) {
+          return (
+            <li key={part._id}>
+              {part.brand} {part.model} {part.price}
+            </li>
+          );
+        } else {
+          return <li key={part.key}>{part.value}</li>;
+        }
+      });
     } else {
       return (
         <li>
@@ -50,29 +54,58 @@ export class Review extends React.Component {
 
   componentDidMount() {
     this.setState(() => ({
-      formInfo: this.props.formInfo,
+      formData: {
+        ...this.props.formInfo,
+      },
     }));
   }
-  componentWillReceiveProps(nextProps) {
-    const formInfo = nextProps.formInfo;
-    this.setState(() => ({
-      formInfo,
-    }));
-  }
+  // check if formData has values, if true then render review details,
+  //  if false render message to return
   render() {
-    const { formInfo } = this.state;
-    return (
-      <Wrapper>
-        <Title>Review</Title>
-        <Divider />
-        <ul>{this.renderFormReview(formInfo)}</ul>
-        <Divider />
-        <SubTitle>Verify Information</SubTitle>
-        <p>
-          If the above values are correct, please proceed to the next step...
-        </p>
-      </Wrapper>
-    );
+    if (this.state.formData.cpu) {
+      const {
+        cpu,
+        gpu,
+        fan,
+        hdd,
+        ssd,
+        ram,
+        mouse,
+        keyboard,
+      } = this.state.formData;
+      const $case = this.state.formData.case;
+      const $parts = [cpu, gpu, fan, hdd, ssd, ram, mouse, keyboard, $case];
+      return (
+        <Wrapper>
+          <Title>Review</Title>
+          <Divider />
+          <ul>
+            {$parts.map(part => {
+              if (part) {
+                return (
+                  <li key={part._id}>
+                    {part.brand} {part.model}
+                  </li>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </ul>
+          <Divider />
+          <SubTitle>Verify Information</SubTitle>
+          <p>
+            If the above values are correct, please proceed to the next step...
+          </p>
+        </Wrapper>
+      );
+    } else {
+      return (
+        <Wrapper>
+          <Title>Please complete the form</Title>
+        </Wrapper>
+      );
+    }
   }
 }
 

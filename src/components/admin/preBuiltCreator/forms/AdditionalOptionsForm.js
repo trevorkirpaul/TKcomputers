@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
-// import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 import Divider from 'material-ui/Divider';
 
 // field level validation functions
@@ -24,24 +25,24 @@ const renderTextField = ({
   />
 );
 
-// // render select field using mat-ui for redux form
-// const renderSelectField = ({
-//   input,
-//   label,
-//   meta: { touched, error },
-//   children,
-//   onChange,
-//   ...custom
-// }) => (
-//   <SelectField
-//     floatingLabelText={label}
-//     errorText={touched && error}
-//     {...input}
-//     onChange={(event, index, value) => input.onChange(value)}
-//     children={children}
-//     {...custom}
-//   />
-// );
+// render select field using mat-ui for redux form
+const renderSelectField = ({
+  input,
+  label,
+  meta: { touched, error },
+  children,
+  onChange,
+  ...custom
+}) => (
+  <SelectField
+    floatingLabelText={label}
+    errorText={touched && error}
+    {...input}
+    onChange={(event, index, value) => input.onChange(value)}
+    children={children}
+    {...custom}
+  />
+);
 
 export class AdditionalOptions extends Component {
   render() {
@@ -72,6 +73,13 @@ export class AdditionalOptions extends Component {
           label="enter description"
           validate={required}
         />
+        <Divider />
+        <Field name="type" component={renderSelectField} label="Computer Type">
+          <MenuItem value="base" primaryText="base" />
+          <MenuItem value="workstation" primaryText="workstation" />
+          <MenuItem value="gaming" primaryText="gaming" />
+          <MenuItem value="server" primaryText="server" />
+        </Field>
       </form>
     );
   }

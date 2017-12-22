@@ -204,6 +204,7 @@ export class AddItemButton extends Component {
             'threads',
             'cores',
             'pciLanes',
+            'price',
           ]}
           errorStatus={this.state.error}
         />

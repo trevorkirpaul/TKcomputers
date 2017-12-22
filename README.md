@@ -61,3 +61,15 @@ One feature that I've enjoyed creating (so far) is the multi-component/page form
 The admin features needed for handeling db actions are now set up and I can start building the customer facing portion of the site. My goal was to at least re-use some of the code from the admin side, like the pre-built form. I can definitely use that for a customer feature of 'create your own pc' to buy.
 
 I'm painting in broad strokes from now on and I'll reafactor once a mvp is achieved.
+
+### Dec 21st, 2017
+
+I ran into a few roadblocks and I made sure to focus on fixing the issues (underlying in this case). This has to do with correctly taking the state from redux and moving it into local state. This is basically just the basics of how I choose to deal with spreading objects and objects in general. Solving these issues took a little time but this entire session really helped me think more about correctly moving data.
+
+I've been having a lot of issues with trying to access data from props that don't exist. I didn't realize it at the time but now I know that I've been spreading objects too earlier for some props in the reduz store state.
+
+Whiles that was definitely worth my time spent on it, I also changed how the PreBuiltCreator form stores each computer part (frontend and backend). Originally I was only saving the objectID of each computer part but I've changed it to store an object for each part. This way I have easier access to data the customer would need immediatley, like price for example. This might makes the process of displaying the computer details much easier.
+
+I do have some issues with redux-form that I need to fix. The validation is still not even working at all and there's a error where if the user goes back to the first page, all teh form values disappear from the screen. The strange thing is that the values are still active and stored in redux state.
+
+I still have much to do but spending time on issues like this are definitely worth my time.

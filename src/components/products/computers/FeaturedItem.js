@@ -33,18 +33,18 @@ const Body = styled.p`
   background: #383838;
 `;
 
-export default () => {
+export default ({ title, subTitle, computerID }) => {
   return (
     <Wrapper>
       <div>
-        <Title>Andromeda</Title>
+        <Title>{title}</Title>
       </div>
 
       <div>
-        <Body>Great value for this galaxy</Body>
+        <Body>{subTitle}</Body>
       </div>
 
-      <Link to="/featured/andromeda">
+      <Link to={`/featured/${computerID}`}>
         <RaisedButton label="View more" />
       </Link>
     </Wrapper>
