@@ -10,11 +10,12 @@ const Button = styled(FlatButton)`
 export default () => {
   return (
     <div>
-      <Link to="/products">
-        <Button label="Products" />
+      <Link to="/products/computers">
+        <Button label="Computers" />
       </Link>
-      <Button label="Support" />
-      <Button label="FAQ" />
+      <Link to="/">
+        <Button label="Parts" />
+      </Link>
     </div>
   );
 };

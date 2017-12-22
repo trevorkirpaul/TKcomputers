@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import PartPanel from './PartPanel';
 
 const Wrapper = styled(Paper)`
   padding: 15px;
@@ -32,6 +33,19 @@ const Title = styled.h1`
   margin: 5px;
   padding: 5px;
 `;
+const SubTitle = styled.h1`
+  color: #383838;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin: 5px;
+  padding: 5px;
+`;
+const UL = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 const Body = styled.p`
   color: #383838;
 `;
@@ -54,7 +68,7 @@ export class FeaturedComputer extends React.Component {
     }));
   }
   render() {
-    const { loading, details } = this.state;
+    const { loading, details, parts } = this.state;
     if (loading) {
       return (
         <Wrapper>
@@ -72,6 +86,20 @@ export class FeaturedComputer extends React.Component {
           <Panel>
             <Body>Price: {details.price}</Body>
             <Body>Type: {details.type}</Body>
+          </Panel>
+          <Panel>
+            <SubTitle>Parts</SubTitle>
+            <UL>
+              {Object.keys(parts).map(item => (
+                <PartPanel
+                  part={item}
+                  key={parts[item]._id}
+                  brand={parts[item].brand}
+                  model={parts[item].model}
+                  price={parts[item].price}
+                />
+              ))}
+            </UL>
           </Panel>
           <Panel>
             <RaisedButton label="Add to cart" />

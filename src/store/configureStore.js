@@ -8,6 +8,7 @@ import viewMoreItemReducer from '../reducers/viewDB/viewMoreItem';
 import profile from '../reducers/profile/profile';
 import PreBuiltCreator from '../reducers/PreBuiltCreator';
 import productView from '../reducers/productView/productView';
+import shoppingCart from '../reducers/shoppingCart';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -24,6 +25,7 @@ export default () => {
       profile,
       PreBuiltCreator,
       productView,
+      shoppingCart,
     }),
     composeEnhancers(applyMiddleware(thunk))
   );

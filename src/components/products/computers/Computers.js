@@ -2,7 +2,6 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
 // import FeaturedItems from './FeaturedItems';
-import ProductHeader from '../ProductHeader';
 import FeaturedItem from './FeaturedItem';
 
 const Wrapper = styled.div``;
@@ -31,7 +30,6 @@ const SubTitle = styled.h2`
 export default () => {
   return (
     <Wrapper>
-      <ProductHeader />
       <Hero zDepth={1}>
         <Title>Computers</Title>
         <SubTitle>
