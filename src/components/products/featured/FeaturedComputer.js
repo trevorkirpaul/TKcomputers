@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchFeaturedComputer } from '../../../actions/productView/productView';
+import { addItemShoppingCart } from '../../../actions/shoppingCart';
 import styled from 'styled-components';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
@@ -56,6 +57,11 @@ export class FeaturedComputer extends React.Component {
       loading: true,
     };
   }
+  handleAddToCart = () => {
+    const productId = this.props.productView.product._id;
+    const userId = this.props.userId;
+    this.props.addItemCart(userId, productId);
+  };
   componentDidMount() {
     this.props.getComputer(this.props.match.params.computerID);
   }
@@ -102,7 +108,7 @@ export class FeaturedComputer extends React.Component {
             </UL>
           </Panel>
           <Panel>
-            <RaisedButton label="Add to cart" />
+            <RaisedButton label="Add to cart" onClick={this.handleAddToCart} />
           </Panel>
         </div>
       );
@@ -111,8 +117,11 @@ export class FeaturedComputer extends React.Component {
 }
 const mapStateToProps = state => ({
   productView: state.productView,
+  userId: state.auth.userID,
 });
 const mapDispatchToProps = dispatch => ({
   getComputer: id => dispatch(fetchFeaturedComputer(id)),
+  addItemCart: (userid, productId) =>
+    dispatch(addItemShoppingCart(userid, productId)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(FeaturedComputer);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchShoppingCart } from '../../actions/shoppingCart';
 
 export class CartItems extends Component {
   constructor(props) {
@@ -8,16 +9,21 @@ export class CartItems extends Component {
       items: [],
     };
   }
-  checkItems = () => {
-    return this.state.items.length > 0 && true;
+  renderCart = () => {
+    return this.state.items ? (
+      this.state.items.map((item, i) => <li key={i}>{item.details.name}</li>)
+    ) : (
+      <li>no</li>
+    );
   };
   componentDidMount() {
+    this.props.fetchCart(this.props.id);
     this.setState(() => ({
-      items: this.props.items,
+      items: this.props.cart,
     }));
   }
   componentWillReceiveProps(nextProps) {
-    const items = nextProps.items;
+    const items = nextProps.cart;
     this.setState(() => ({
       items,
     }));
@@ -25,21 +31,17 @@ export class CartItems extends Component {
   render() {
     return (
       <div>
-        <ul>
-          {this.checkItems === true ? (
-            this.state.items.map(item => <li key={item}>{item}</li>)
-          ) : (
-            <li>
-              <p>Shopping Cart Empty</p>
-            </li>
-          )}
-        </ul>
+        <ul>{this.renderCart()}</ul>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  items: state.profile,
+  cart: state.shoppingCart.cart,
+  id: state.auth.userID,
 });
-export default connect(mapStateToProps)(CartItems);
+const mapDispatchToProps = dispatch => ({
+  fetchCart: id => dispatch(fetchShoppingCart(id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(CartItems);
