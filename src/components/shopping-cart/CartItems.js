@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchShoppingCart } from '../../actions/shoppingCart';
+import {
+  fetchShoppingCart,
+  removeItemShoppingCart,
+} from '../../actions/shoppingCart';
+import CartItem from './CartItem';
 
 export class CartItems extends Component {
   constructor(props) {
@@ -9,11 +13,25 @@ export class CartItems extends Component {
       items: [],
     };
   }
+  handleRemoveItem = itemID => {
+    // console.log(itemID);
+    const userID = this.props.id;
+    const cartItemID = itemID;
+    this.props.removeItem(userID, cartItemID);
+  };
   renderCart = () => {
     return this.state.items ? (
-      this.state.items.map((item, i) => <li key={i}>{item.details.name}</li>)
+      this.state.items.map((item, index) => (
+        <CartItem
+          key={index}
+          itemID={item._id}
+          quantity={item.itemDetails.quantity}
+          price={item.itemDetails.pricePerUnit}
+          handleRemove={this.handleRemoveItem}
+        />
+      ))
     ) : (
-      <li>no</li>
+      <li>no items in cart</li>
     );
   };
   componentDidMount() {
@@ -43,5 +61,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   fetchCart: id => dispatch(fetchShoppingCart(id)),
+  removeItem: (userID, cartItemID) =>
+    dispatch(removeItemShoppingCart(userID, cartItemID)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(CartItems);

@@ -29,10 +29,17 @@ export const fetchShoppingCart = id => {
   };
 };
 
-export const addItemShoppingCart = (userId, productId) => {
+export const addItemShoppingCart = (
+  userId,
+  productId,
+  itemQuantity,
+  pricePerUnit
+) => {
   const addItem = axios.put(`http://${API.API_URI}/shoppingcart/add`, {
     userId,
     productId,
+    itemQuantity,
+    pricePerUnit,
   });
   return dispatch => {
     dispatch({
@@ -58,6 +65,39 @@ export const addItemShoppingCart = (userId, productId) => {
           type: 'ERROR:SHOPPING_CART',
           error: true,
           loading: false,
+        });
+      });
+  };
+};
+// using id from CartItem id
+// CartItems are each item in the shoppingCart array
+// located in the User mode, orders property
+export const removeItemShoppingCart = (userID, cartItemID) => {
+  const removeItem = axios.put(`http://${API.API_URI}/shoppingcart/remove`, {
+    userID,
+    cartItemID,
+  });
+  return dispatch => {
+    dispatch({
+      type: 'LOADING:REMOVE_ITEM:SHOPPING_CART',
+      loading: true,
+      error: false,
+    });
+    removeItem
+      .then(({ data }) => {
+        dispatch({
+          type: 'SUCCESS:REMOVE_ITEM:SHOPPING+CART',
+          data,
+          loading: false,
+          error: false,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: 'ERROR:SHOPPING_CART',
+          error: true,
+          loading: false,
+          err,
         });
       });
   };

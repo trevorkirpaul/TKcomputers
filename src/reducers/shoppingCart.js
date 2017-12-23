@@ -16,6 +16,12 @@ export default (state = defaultShoppingCartState, action) => {
         loading: action.loading,
         error: action.error,
       };
+    case 'LOADING:REMOVE_ITEM:SHOPPING_CART':
+      return {
+        ...state,
+        loading: action.loading,
+        error: action.error,
+      };
     case 'SUCCESS:ADD_ITEM:SHOPPING_CART':
       return {
         ...state,

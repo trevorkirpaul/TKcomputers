@@ -7,6 +7,8 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import PartPanel from './PartPanel';
 
 const Wrapper = styled(Paper)`
@@ -55,12 +57,18 @@ export class FeaturedComputer extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      quantity: 1,
     };
   }
+  handleChangeQuantity = (event, index, value) => {
+    this.setState({ quantity: value });
+  };
   handleAddToCart = () => {
     const productId = this.props.productView.product._id;
     const userId = this.props.userId;
-    this.props.addItemCart(userId, productId);
+    const itemQuantity = this.state.quantity;
+    const pricePerUnit = this.props.productView.product.details.price;
+    this.props.addItemCart(userId, productId, itemQuantity, pricePerUnit);
   };
   componentDidMount() {
     this.props.getComputer(this.props.match.params.computerID);
@@ -108,6 +116,16 @@ export class FeaturedComputer extends React.Component {
             </UL>
           </Panel>
           <Panel>
+            <SelectField
+              floatingLabelText="Quantity"
+              value={this.state.quantity}
+              onChange={this.handleChangeQuantity}
+            >
+              <MenuItem value={1} primaryText="1" />
+              <MenuItem value={2} primaryText="2" />
+              <MenuItem value={3} primaryText="3" />
+              <MenuItem value={4} primaryText="4" />
+            </SelectField>
             <RaisedButton label="Add to cart" onClick={this.handleAddToCart} />
           </Panel>
         </div>
@@ -121,7 +139,9 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   getComputer: id => dispatch(fetchFeaturedComputer(id)),
-  addItemCart: (userid, productId) =>
-    dispatch(addItemShoppingCart(userid, productId)),
+  addItemCart: (userid, productId, itemQuantity, pricePerUnit) =>
+    dispatch(
+      addItemShoppingCart(userid, productId, itemQuantity, pricePerUnit)
+    ),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(FeaturedComputer);
