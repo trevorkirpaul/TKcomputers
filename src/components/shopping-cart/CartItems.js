@@ -18,6 +18,12 @@ export class CartItems extends Component {
     const userID = this.props.id;
     const cartItemID = itemID;
     this.props.removeItem(userID, cartItemID);
+    // update local state
+    // for user experience
+    const items = this.state.items.filter(item => item._id !== cartItemID);
+    this.setState(() => ({
+      items,
+    }));
   };
   renderCart = () => {
     return this.state.items ? (

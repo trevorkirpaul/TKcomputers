@@ -1,8 +1,45 @@
 import axios from 'axios';
 import { API } from '../config';
-
+const Token_signin = `http://${API.API_URI}`;
 const URL_signin = `http://${API.API_URI}/signin`;
 const URL_signup = `http://${API.API_URI}/signup`;
+
+export const tokenAuth = token => {
+  // set up token for server
+  const tokenObject = {
+    headers: {
+      authorization: token,
+    },
+  };
+  return dispatch => {
+    dispatch({
+      type: 'CLICKED_LOG_IN',
+      auth: { loading: true },
+    });
+    axios
+      .get(Token_signin, tokenObject)
+      .then(({ data }) => {
+        dispatch({
+          type: 'LOG_IN',
+          auth: {
+            auth: true,
+            userID: data,
+            loading: false,
+          },
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: 'AUTH_ERROR',
+          auth: {
+            auth: false,
+            error: 'Server error! Please try again or contact an admin!',
+            loading: false,
+          },
+        });
+      });
+  };
+};
 
 export const signIn = function({ email, password }) {
   return dispatch => {
@@ -16,7 +53,8 @@ export const signIn = function({ email, password }) {
           type: 'LOG_IN',
           auth: {
             auth: true,
-            token: data,
+            token: data.token,
+            userID: data.userID,
             loading: false,
           },
         });

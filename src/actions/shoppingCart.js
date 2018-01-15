@@ -69,9 +69,7 @@ export const addItemShoppingCart = (
       });
   };
 };
-// using id from CartItem id
-// CartItems are each item in the shoppingCart array
-// located in the User mode, orders property
+
 export const removeItemShoppingCart = (userID, cartItemID) => {
   const removeItem = axios.put(`http://${API.API_URI}/shoppingcart/remove`, {
     userID,
