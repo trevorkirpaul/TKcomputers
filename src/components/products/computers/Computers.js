@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchComputers } from '../../../actions/computers';
 import Paper from 'material-ui/Paper';
 import styled from 'styled-components';
-// import FeaturedItems from './FeaturedItems';
 import FeaturedItem from './FeaturedItem';
+import ComputerList from './ComputerList';
 
 const Wrapper = styled.div``;
 
@@ -27,20 +29,37 @@ const SubTitle = styled.h2`
   margin: 10px;
 `;
 
-export default () => {
-  return (
-    <Wrapper>
-      <Hero zDepth={1}>
-        <Title>Computers</Title>
-        <SubTitle>
-          Designed and tested to be the best tool you've ever used
-        </SubTitle>
-      </Hero>
-      <FeaturedItem
-        title="Andromeda"
-        subTitle="Great value for this galaxy"
-        computerID="5a3c4af314ae643a2da59758"
-      />
-    </Wrapper>
-  );
-};
+export class Computers extends Component {
+  componentDidMount() {
+    this.props.fetchComputers();
+  }
+  render() {
+    const computers = this.props.computers.items;
+    return (
+      <Wrapper>
+        <Hero zDepth={1}>
+          <Title>Computers</Title>
+          <SubTitle>
+            Designed and tested to be the best tool you've ever used
+          </SubTitle>
+        </Hero>
+        <FeaturedItem
+          title="Andromeda"
+          subTitle="Great value for this galaxy"
+          computerID="5a3c4af314ae643a2da59758"
+        />
+        <ComputerList computers={computers} />
+      </Wrapper>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  computers: state.computers,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchComputers: () => dispatch(fetchComputers()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Computers);

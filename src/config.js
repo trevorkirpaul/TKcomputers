@@ -7,3 +7,5 @@ export const API = {
 };
 
 // https://coolors.co/f7f7f7-20a39e-b4d2ba-d0e87a-d6d1b1
+
+export const IMG_url = `http://${localhost}:3090/images/`;

@@ -9,6 +9,7 @@ import profile from '../reducers/profile/profile';
 import PreBuiltCreator from '../reducers/PreBuiltCreator';
 import productView from '../reducers/productView/productView';
 import shoppingCart from '../reducers/shoppingCart';
+import computers from '../reducers/computers';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,6 +27,7 @@ export default () => {
       PreBuiltCreator,
       productView,
       shoppingCart,
+      computers,
     }),
     composeEnhancers(applyMiddleware(thunk))
   );
